@@ -16,6 +16,7 @@
 			print "<th>Nome</th>";
 			print "<th>E-mail</th>";
 			print "<th>Telefone</th>";
+			print "<th>Ações</th>";
 		print "</tr>";
 
 		while ($row = $res->fetch_object() ) {
@@ -25,11 +26,15 @@
 			print "<td>".$row->nome_funcionario."</td>";
 			print "<td>".$row->email_funcionario."</td>";
 			print "<td>".$row->telefone_funcionario."</td>";
+			print "<td>
+				<button class='btn btn-success' onclick=\"location.href='?page=editar-funcionario&id_funcionario={$row->id_funcionario}';\">Editar</button>
+
+				<button class='btn btn-danger' onclick=\"if(confirm('Tem certeza que deseja excluir?')){location.href='?page=salvar-funcionario&acao=excluir&id_funcionario={$row->id_funcionario}';}else{false;}\">Excluir</button> </td>";
 		print "</tr>";
 		}
 		print "</table>";
 	}else{
-		print "<p>Mão encontrou resultado</p>";
+		print "<p>Não encontrou resultado</p>";
 	}
 
 ?>

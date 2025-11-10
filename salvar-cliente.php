@@ -5,25 +5,48 @@
 			$email = $_POST['email_cliente'];
 			$telefone = $_POST['telefone_cliente'];
 
-			$sql = "INSERT INTO cliente (nome_cliente, email_cliente, telefone_cliente) VALUES ('{$nome}', '{$nome}', '{$nome}')";
+			$sql = "INSERT INTO cliente (nome_cliente, email_cliente, telefone_cliente) VALUES ('{$nome}', '{$email}', '{$telefone}')";
 
 			$res = $conn -> query($sql);
 
 			if($res == true){
-				print "script>alert('Cadastrou com sucesso!');</script>";
-				print "script>location.href='?page=listar-cliente';</script>";
+				print "<script>alert('Cadastrou com sucesso!');</script>";
+				print "<script>location.href='?page=listar-cliente';</script>";
 			}else{
-				print "script>alert('Não cadastrou!');</script>";
-				print "script>location.href='?page=listar-cliente';</script>";
+				print "<script>alert('Não cadastrou!');</script>";
+				print "<script>location.href='?page=listar-cliente';</script>";
 			}
 			break;
 
 			case 'editar':
-			//code...
+				$nome = $_POST['nome_cliente'];
+				$email = $_POST['email_cliente'];
+				$telefone = $_POST['telefone_cliente'];
+
+				$sql = "UPDATE cliente SET nome_cliente='{$nome}', email_cliente='{$email}',telefone_cliente='{$telefone}' WHERE id_cliente=".$_REQUEST['id_cliente'];
+
+				$res = $conn->query($sql);
+
+				if ($res == true) {
+					print "<script>alert('Editado com sucesso!')</script>";
+					print "<script>location.href='?page=listar-cliente';</script>";
+				}else{
+					print "<script>alert('Não editou')</script>";
+					print "<script>location.href='?page=listar-cliente';</script>";
+				}
 			break;
 
 			case 'excluir':
-			//code...
+				$sql = "DELETE FROM cliente WHERE id_cliente=" .$_REQUEST['id_cliente'];
+
+				$res = $conn->query($sql);
+
+				if($res == true){
+					print "<script>alert('Excluído com sucesso!')</script>";
+					print "<script>location.href='?page=listar-cliente';</script>";
+				}else{
+					print "<script>alert('Não excluiu')</script>";
+					print "<script>location.href='?page=listar-cliente';</script>";}
 			break;
 	}
 ?>

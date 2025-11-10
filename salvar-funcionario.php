@@ -19,11 +19,34 @@
 			break;
 
 			case 'editar':
-			//code...
+				$nome = $_POST['nome_funcionario'];
+				$email = $_POST['email_funcionario'];
+				$telefone = $_POST['telefone_funcionario'];
+
+				$sql = "UPDATE funcionario SET nome_funcionario='{$nome}', email_funcionario='{$email}',telefone_funcionario='{$telefone}' WHERE id_funcionario=".$_REQUEST['id_funcionario'];
+
+				$res = $conn->query($sql);
+
+				if ($res == true) {
+					print "<script>alert('Editado com sucesso!')</script>";
+					print "<script>location.href='?page=listar-funcionario';</script>";
+				}else{
+					print "<script>alert('Não editou')</script>";
+					print "<script>location.href='?page=listar-funcionario';</script>";
+				}
 			break;
 
 			case 'excluir':
-			//code...
+				$sql = "DELETE FROM funcionario WHERE id_funcionario=" .$_REQUEST['id_funcionario'];
+
+				$res = $conn->query($sql);
+
+				if($res == true){
+					print "<script>alert('Excluído com sucesso!')</script>";
+					print "<script>location.href='?page=listar-funcionario';</script>";
+				}else{
+					print "<script>alert('Não excluiu')</script>";
+					print "<script>location.href='?page=listar-funcionario';</script>";}
 			break;
 	}
 ?>
